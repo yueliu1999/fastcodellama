@@ -108,7 +108,7 @@ fastcodellama is a method to losslessly accelerate subsequent code generation us
     <img src="./asset/fastcodellama.svg" width=100%/>
 </div>
 
-#### Preliminary results(with A100)
+#### Preliminary results(with one A100)
 
 <table class="tg">
 <thead>
@@ -146,15 +146,24 @@ fastcodellama is a method to losslessly accelerate subsequent code generation us
     <td class="tg-c3ow"></td>
     <td class="tg-c3ow"></td>
   </tr>
-  <tr>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-  </tr>
+
+[//]: # (  <tr>)
+
+[//]: # (    <td class="tg-c3ow"></td>)
+
+[//]: # (    <td class="tg-c3ow"></td>)
+
+[//]: # (    <td class="tg-c3ow"></td>)
+
+[//]: # (    <td class="tg-c3ow"></td>)
+
+[//]: # (    <td class="tg-c3ow"></td>)
+
+[//]: # (    <td class="tg-c3ow"></td>)
+
+[//]: # (    <td class="tg-c3ow"></td>)
+
+[//]: # (  </tr>)
 </tbody>
 </table>
 
