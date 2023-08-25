@@ -162,7 +162,7 @@ def make_past_key_values(past_key_values, step_length, accepted_step_length):
     return tuple(pkv_list)
 
 
-def SAcCG_generate_one(model, tokenizer, input_ids, gen_texts_ids, trigger_N, block_K, pass_k=1, forced_decoding=False,
+def fastcodellama_generate_one(model, tokenizer, input_ids, gen_texts_ids, trigger_N, block_K, pass_k=1, forced_decoding=False,
                   ngrams_cache=None):
     generate_ids_list = []
     doc_list = []
@@ -260,7 +260,7 @@ def SAcCG_generate_one(model, tokenizer, input_ids, gen_texts_ids, trigger_N, bl
     return generate_ids_list, accepted_tokens
 
 
-def SAcCG_generate(model, tokenizer, input_ids, gen_texts_ids, trigger_N, block_K, pass_k=1, forced_decoding=False,
+def fastcodellama_generate(model, tokenizer, input_ids, gen_texts_ids, trigger_N, block_K, pass_k=1, forced_decoding=False,
                   ngrams_cache=None):
     generate_ids_list = []
     doc_list = []
@@ -438,16 +438,16 @@ def main():
         total_time = run_time_test(s_list, base_generate, model, tokenizer, 1, 1, passk, output_fn, append_docs=args.append_docs,
                                    forced_decoding=args.forced_decoding)
         print(total_time)
-    else:
-        print("SAcCG decoding")
+    elif args.type == "fastcodellama":
+        print("fastcodellama decoding")
         trigger_N = args.n
         block_K = args.k
         print(f"n={trigger_N}, k={block_K}")
         if passk > 1:
-            total_time = run_time_test(s_list, SAcCG_generate, model, tokenizer, trigger_N, block_K, passk, output_fn,
+            total_time = run_time_test(s_list, fastcodellama_generate, model, tokenizer, trigger_N, block_K, passk, output_fn,
                                        append_docs=args.append_docs, forced_decoding=args.forced_decoding)
         else:
-            total_time = run_time_test(s_list, SAcCG_generate_one, model, tokenizer, trigger_N, block_K, passk, output_fn,
+            total_time = run_time_test(s_list, fastcodellama_generate_one, model, tokenizer, trigger_N, block_K, passk, output_fn,
                                        append_docs=args.append_docs, forced_decoding=args.forced_decoding)
         print(total_time)
 
