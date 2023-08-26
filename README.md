@@ -140,7 +140,7 @@ fastcodellama is a method to losslessly accelerate subsequent code generation us
   <tr>
     <td class="tg-c3ow">FastCodeLlama-7B</td>
     <td class="tg-c3ow">43.91 <b>(44.58%↑)</b></td>
-    <td class="tg-c3ow">43.05  <b>(47.02%↑</b></td>
+    <td class="tg-c3ow">43.05  <b>(47.02%↑)</b></td>
     <td class="tg-c3ow">47.94  <b>(55.20%↑)</b></td>
     <td class="tg-c3ow">1455.84  <b>(32.17%↓)</b></td>
     <td class="tg-c3ow">7289.19  <b>(31.35%↓)</b></td>
