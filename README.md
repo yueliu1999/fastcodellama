@@ -1,7 +1,7 @@
 # fastcodellama
 ### Self-Acceleration of Code Llama for Code Generation
 
-### 1. Usage of Code Llama with Transformers
+### 1. Usage of Code Llama with Huggingface Transformers
 Code Llama is a collection of pretrained and fine-tuned generative text models ranging in scale from 7 billion to 34 billion parameters. This model is designed for general code synthesis and understanding. Links to other models can be found in the index at the bottom.
 
 #### Installation
