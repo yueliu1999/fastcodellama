@@ -130,21 +130,21 @@ fastcodellama is a method to losslessly accelerate subsequent code generation us
   </tr>
   <tr>
     <td class="tg-c3ow">CodeLlama-7B</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow">30.37</td>
+    <td class="tg-c3ow">29.28</td>
+    <td class="tg-c3ow">30.89</td>
     <td class="tg-c3ow">2146.44</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow">10618.33</td>
+    <td class="tg-c3ow">19994.44</td>
   </tr>
   <tr>
     <td class="tg-c3ow">FastCodeLlama-7B</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow">43.91 (44.58%↑)</td>
+    <td class="tg-c3ow">43.05 (47.02%↑)</td>
+    <td class="tg-c3ow">47.94 (55.20%↑)</td>
     <td class="tg-c3ow">1455.84 (32.17%↓)</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow">7289.19 (31.35%↓)</td>
+    <td class="tg-c3ow">12723.17 (36.37%↓)</td>
   </tr>
 
 [//]: # (  <tr>)
