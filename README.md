@@ -21,15 +21,7 @@ This branch was created by the huggingface team to support Code Llama. Make sure
 
 **Note: Code Llama is currently not supported by directly installed transformers**
 ```bash
-pip install git+https://github.com/huggingface/transformers.git@refs/pull/25740/head accelerate
-pip install torch tensorflow sentencepiece tqdm
-```
-
-If the time is out or the installation fails, please manually execute the following command.
-
-```bash
-git clone --single-branch --branch add-llama-code https://github.com/ArthurZucker/transformers.git
-pip install ./transformers accelerate
+pip install git+https://github.com/huggingface/transformers.git@main accelerate
 pip install torch tensorflow sentencepiece tqdm
 ```
 
