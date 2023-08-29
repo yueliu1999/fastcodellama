@@ -9,14 +9,14 @@ Code Llama 是经过预训练和微调的代码生成模型的集合，参数规
 
 **注意：Code Llama 目前不支持直接pip安装的transformers**
 ```bash
-pip install git+https://github.com/huggingface/transformers.git@refs/pull/25740/head accelerate
+pip install git+https://github.com/huggingface/transformers.git@main accelerate
 pip install torch tensorflow sentencepiece tqdm
 ```
 
 如果git超时或者安装失败，请手动执行以下命令.
 
 ```bash
-git clone --single-branch --branch add-llama-code https://github.com/ArthurZucker/transformers.git
+git clone --single-branch --branch main https://github.com/huggingface/transformers.git
 pip install ./transformers accelerate
 pip install torch tensorflow sentencepiece tqdm
 ```
