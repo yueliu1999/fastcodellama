@@ -3,7 +3,6 @@ import torch
 import json
 from collections import defaultdict
 from tqdm import tqdm
-
 import time
 import argparse
 import jsonlines
@@ -24,8 +23,8 @@ def get_args():
 
 
 def get_tokenizer_and_model(llama_path):
-    tokenizer = AutoTokenizer.from_pretrained("codellama/CodeLlama-7b-hf", mirror='tuna', cache_dir=llama_path)
-    model = AutoModelForCausalLM.from_pretrained("codellama/CodeLlama-7b-hf", mirror='tuna', cache_dir=llama_path)
+    tokenizer = AutoTokenizer.from_pretrained(llama_path)
+    model = AutoModelForCausalLM.from_pretrained(llama_path)
     model.half()
     model.cuda()
     return tokenizer, model
@@ -112,8 +111,8 @@ def base_generate(model, tokenizer, input_ids, gen_texts_ids, trigger_N=0, block
                                use_cache=True)
                 logits = output['logits']
                 logits = logits[:, -1:, :]
-                output_ids = temperature_sampling(logits, temperature=0.7)
-                # output_ids = torch.argmax(logits, dim=-1)
+                # output_ids = temperature_sampling(logits, temperature=0.7)
+                output_ids = torch.argmax(logits, dim=-1)
 
                 if forced_decoding:
                     output_ids = gen_texts_ids[:, step:step + step_length].to(output_ids.device)
@@ -380,30 +379,28 @@ def run_time_test(s_list, decoding_fn, model, tokenizer, trigger_N, block_K, pas
         s["inputs"] = inputs
 
     accepted_tokens = 0
-    acc_time = 0
-    total_length = 0
     results = []  # 生成的代码结果
-    total_start_time = time.time()
+    total_time = 0
     for s in tqdm(s_list):
-        start_time = time.time()
         inputs = s["inputs"]
         ngrams_cache = s["ngrams_cache"]
         gen_texts_ids = s["gen_texts_ids"]
 
+        # generate time
+        start_time = time.time()
         generate_ids_list, accepted_token_nums = decoding_fn(model, tokenizer, inputs.input_ids, gen_texts_ids, trigger_N=trigger_N,
                                    block_K=block_K, pass_k=passk, forced_decoding=forced_decoding, ngrams_cache=ngrams_cache)
-        total_length = generate_ids_list[0].shape[-1] + total_length   # 先选第一个测试
+        generated = tokenizer.batch_decode(generate_ids_list[0], skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
         end_time = time.time()
-        s_time = end_time - start_time
-        acc_time = s_time + acc_time
-        generated = tokenizer.batch_decode(generate_ids_list[0], skip_special_tokens=True, clean_up_tokenization_spaces=False)[
-            0]
+        it_time = end_time-start_time
+        total_time += it_time
+
         s["output"] = generated
         accepted_tokens += accepted_token_nums
-        print(s['task_id'])
-        print(s['prompt'])
-        print('---------------------------------------------------------------------')
-        print(generated)
+        # print(s['task_id'])
+        # print(s['prompt'])
+        # print('---------------------------------------------------------------------')
+        # print(generated)
 
         # 保存结果
         for generate_ids in generate_ids_list:
@@ -413,10 +410,6 @@ def run_time_test(s_list, decoding_fn, model, tokenizer, trigger_N, block_K, pas
             result['completion'] = generated
             results.append(result)
 
-    total_end_time = time.time()
-    total_time = total_end_time - total_start_time
-
-    # 保存结果到jsonl
     with jsonlines.open(output_data_fn, mode='w') as writer:
         for item in results:
             writer.write(item)
@@ -450,6 +443,7 @@ def main():
             total_time = run_time_test(s_list, fastcodellama_generate_one, model, tokenizer, trigger_N, block_K, passk, output_fn,
                                        append_docs=args.append_docs, forced_decoding=args.forced_decoding)
         print(total_time)
+
 
 
 if __name__ == "__main__":

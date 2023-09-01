@@ -1,4 +1,4 @@
-from transformers import LlamaForCausalLM, LlamaTokenizer
+from transformers import LlamaForCausalLM, LlamaTokenizer, AutoTokenizer, AutoModelForCausalLM
 import torch
 import json
 from collections import defaultdict
@@ -19,16 +19,18 @@ def get_args():
 
 
 def get_tokenizer_and_model(llama_path):
-   # tokenizer = LlamaTokenizer.from_pretrained(llama_path)
-   # model = LlamaForCausalLM.from_pretrained(llama_path)
-    tokenizer = LlamaTokenizer.from_pretrained("huggyllama/llama-7b", mirror='tuna', cache_dir=llama_path)
-    model = LlamaForCausalLM.from_pretrained("huggyllama/llama-7b", mirror='tuna', cache_dir=llama_path)
+    tokenizer = AutoTokenizer.from_pretrained(llama_path, mirror='tuna', cache_dir=llama_path)
+    model = AutoModelForCausalLM.from_pretrained(llama_path, mirror='tuna', cache_dir=llama_path)
+    # tokenizer = LlamaTokenizer.from_pretrained(llama_path)
+    # model = LlamaForCausalLM.from_pretrained(llama_path)
+    #tokenizer = LlamaTokenizer.from_pretrained("huggyllama/llama-7b", mirror='tuna', cache_dir=llama_path)
+    #model = LlamaForCausalLM.from_pretrained("huggyllama/llama-7b", mirror='tuna', cache_dir=llama_path)
     model.half()
     model.cuda()
     return tokenizer, model
 
 
-def load_data(input_fn, tokenizer):
+def load_data(input_fn):
     s_list = []
     with open(input_fn) as fin:
         for line in fin:
@@ -53,7 +55,7 @@ def main():
             break
         time = input('time: ')
 
-        s_list = load_data(data_path, tokenizer)
+        s_list = load_data(data_path)
         alltokens = 0.0
         for s in s_list:
             gtokens = len(tokenizer.tokenize(s))
