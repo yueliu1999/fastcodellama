@@ -145,6 +145,24 @@ fastcodellama 是一种使用 LLM 先前生成的代码来无损加速后续代�
     <td class="tg-c3ow">7289.19  <b>(31.35%↓)</b></td>
     <td class="tg-c3ow">12723.17  <b>(36.37%↓)</b></td>
   </tr>
+  <tr>
+    <td class="tg-c3ow">CodeLlama-13B</td>
+    <td class="tg-c3ow"> </td>
+    <td class="tg-c3ow">  </td>
+    <td class="tg-c3ow"> </td>
+    <td class="tg-c3ow">2690.52  </td>
+    <td class="tg-c3ow"> 13234.82 </td>
+    <td class="tg-c3ow"> 34192.78 </td>
+  </tr>
+ <tr>
+    <td class="tg-c3ow">FastCodeLlama-13B</td>
+    <td class="tg-c3ow"> </td>
+    <td class="tg-c3ow">  </td>
+    <td class="tg-c3ow"> </td>
+    <td class="tg-c3ow">1514.74 <b>(43.70%↓)</b></td>
+    <td class="tg-c3ow"> 8179.09 <b>(38.20%↓)</b></td>
+    <td class="tg-c3ow">  </td>
+  </tr>
 
 [//]: # (  <tr>)
 
