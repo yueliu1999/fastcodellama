@@ -1,11 +1,6 @@
-from transformers import LlamaForCausalLM, LlamaTokenizer, AutoTokenizer, AutoModelForCausalLM
-import torch
 import json
-from collections import defaultdict
-from tqdm import tqdm
-
-import time
 import argparse
+from transformers import LlamaForCausalLM, LlamaTokenizer, AutoTokenizer, AutoModelForCausalLM
 
 
 def get_args():
@@ -42,18 +37,20 @@ def load_data(input_fn):
 
 def main():
     args = get_args()
-    time = args.time
     llama_path = args.model_path
     tokenizer, model = get_tokenizer_and_model(llama_path)
-    input_fn = args.input_data_fn
+    data_path_list = ["results/output_base_pass1.jsonl",
+                      "results/output_base_pass5.jsonl",
+                      "results/output_base_pass10.jsonl",
+                      "results/output_fastcodellama_pass1.jsonl",
+                      "results/output_fastcodellama_pass5.jsonl",
+                      "results/output_fastcodellama_pass10.jsonl",
+                      ]
+    time_list = [2690.52, 13234.82, 35212.67, 1514.74, 8179.09, 13884.78]
 
-
-    while True:
-        data_path = input('data_path: ')
-        if data_path=="break":
-            print('end')
-            break
-        time = input('time: ')
+    for i in range(6):
+        data_path = data_path_list[i]
+        time = time_list[i]
 
         s_list = load_data(data_path)
         alltokens = 0.0
@@ -62,6 +59,7 @@ def main():
             alltokens += gtokens
         print('all tokens: ', alltokens)
         print('tokens/sec: ', alltokens/float(time))
+
 
 if __name__ == '__main__':
     main()
